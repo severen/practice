@@ -17,12 +17,10 @@ fn main() -> Result<()> {
 }
 
 fn part1(input: &String) -> Result<()> {
-    let mut frequency = 0;
-
-    for line in input.lines() {
-        let change: i32 = line.parse()?;
-        frequency += change;
-    }
+    let frequency: i32 = input
+        .lines()
+        .map(|line| line.parse::<i32>().unwrap())
+        .sum();
 
     println!("{}", frequency);
 
@@ -34,16 +32,21 @@ fn part2(input: &String) -> Result<()> {
     let mut seen: HashSet<i32> = HashSet::new();
     seen.insert(frequency);
 
-    loop {
-        for line in input.lines() {
-            let change: i32 = line.parse()?;
-            frequency += change;
+    let changes = input
+        .lines()
+        .map(|line| line.parse::<i32>().unwrap())
+        .cycle();
 
-            if seen.contains(&frequency) {
-                println!("{}", frequency);
-                return Ok(());
-            }
+    for change in changes {
+        frequency += change;
+
+        if seen.contains(&frequency) {
+            break;
+        } else {
             seen.insert(frequency);
         }
     }
+
+    println!("{}", frequency);
+    Ok(())
 }
