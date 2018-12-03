@@ -4,7 +4,7 @@ use std::{
     collections::HashSet,
 };
 
-type Result<T> = std::result::Result<T, Box<std::error::Error>>;
+type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn main() -> Result<()> {
     let mut input = String::new();
