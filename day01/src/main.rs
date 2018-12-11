@@ -24,7 +24,7 @@ fn part1(input: &String) -> Result<()> {
 
     println!("{}", frequency);
 
-    Ok(()) 
+    Ok(())
 }
 
 fn part2(input: &String) -> Result<()> {
