@@ -16,7 +16,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn part1(input: &String) -> Result<()> {
+fn part1(input: &str) -> Result<()> {
     let frequency: i32 = input
         .lines()
         .map(|line| line.parse::<i32>().unwrap())
@@ -27,7 +27,7 @@ fn part1(input: &String) -> Result<()> {
     Ok(())
 }
 
-fn part2(input: &String) -> Result<()> {
+fn part2(input: &str) -> Result<()> {
     let mut frequency = 0;
     let mut seen: HashSet<i32> = HashSet::new();
     seen.insert(frequency);
