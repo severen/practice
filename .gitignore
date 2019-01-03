@@ -3,13 +3,14 @@
 # Metadata storage
 .exercism
 
-# Exercism's READMEs, Makefiles, and test directories are not very useful to
-# someone who is interested in my solutions, since such a person is likely to
-# already have them. In addition to this, they are subject to change, which
-# would this repository could end up with outdated files littered around.
+# These files are not very useful to anyone who is interested in my solutions,
+# since such a person is likely to already have them. In addition to this, they
+# are subject to change, which would this repository could end up with outdated
+# files littered around.
 exercism/**/README.md
 exercism/c/*/makefile
 exercism/c/*/test
+exercism/rust/*/GETTING_STARTED.md
 
 ## C/C++
 
