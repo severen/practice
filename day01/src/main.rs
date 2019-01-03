@@ -29,7 +29,7 @@ fn part1(input: &str) -> Result<()> {
 
 fn part2(input: &str) -> Result<()> {
     let mut frequency = 0;
-    let mut seen: HashSet<i32> = HashSet::new();
+    let mut seen = HashSet::new();
     seen.insert(frequency);
 
     let changes = input
