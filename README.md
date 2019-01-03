@@ -1,15 +1,23 @@
-# Advent of Code 2018
+# Programming Practice
 
-These are my solutions to the [Advent of Code
-2018](https://adventofcode.com/2018).
+This repository contains various programming exercises and puzzles from various
+places that I've attempted to solve.
 
-The language I have chosen to implement my solutions in this year is
-[Rust](https://rust-lang.org/).
+## Why?
 
-To run a solution, enter its directory and invoke the program with Cargo. For
-example:
+I started doing these for a simple reason: I realised that I wasn't as good at
+the fundamentals of programming as I would like to be.
 
-```sh
-$ cd day01
-$ cargo run
-```
+Therefore this repository is one attempt to fix that.
+
+Additionally, solving problems is a good skill to exercise in general, not to
+mention being a (generally) enjoyable and fun thing to spend time on (especially
+when you hit one of those aha moments).
+
+## Sources
+
+The sources for the exercises in this repository are as follows:
+
+* [Advent of Code](https://adventofcode.com/)
+* [Exercism](https://exercism.io/)
+  ([profile](https://exercism.io/profiles/severen))
