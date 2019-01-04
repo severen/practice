@@ -1,0 +1,12 @@
+[package]
+name = "pythagorean_triplet"
+version = "0.0.0"
+
+[dependencies]
+
+[dev-dependencies]
+criterion = "0.2.5"
+
+[[bench]]
+name = "benchmark"
+harness = false
