@@ -3,9 +3,8 @@
 
 #include <stdlib.h>
 #include <stdbool.h>
-#include <string.h>
 #include <ctype.h>
 
-bool is_isogram(const char phrase[]);
+bool is_isogram(const char word[]);
 
 #endif

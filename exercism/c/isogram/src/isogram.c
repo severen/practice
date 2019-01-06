@@ -1,27 +1,24 @@
 #include "isogram.h"
 
-int cmp(const void* a, const void* b) {
-  return *(const char*)a < *(const char*)b;
-}
-
-bool is_isogram(const char phrase[]) {
-  if (!phrase) {
+bool is_isogram(const char word[]) {
+  if (!word) {
     return false;
   }
 
-  // Copy string into writable memory for qsort.
-  char* sorted = malloc(strlen(phrase) + 1);
-  strncpy(sorted, phrase, strlen(phrase));
+  char found[26] = {0};
+  for (size_t i = 0; word[i] != '\0'; i++) {
+    char c = word[i];
 
-  qsort(sorted, strlen(sorted), sizeof(char), cmp);
+    if (!isalpha(c)) continue;
 
-  for (int i = 0; sorted[i]; i++) {
-    if (tolower(sorted[i]) == tolower(sorted[i + 1]) && isalpha(sorted[i])) {
-      free(sorted);
+    int i = tolower(c) - 'a';
+
+    if (found[i]) {
       return false;
+    } else {
+      found[i] = true;
     }
   }
 
-  free(sorted);
   return true;
 }
