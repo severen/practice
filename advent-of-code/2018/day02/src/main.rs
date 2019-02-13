@@ -46,10 +46,8 @@ fn part1(input: &str) -> Result<()> {
 fn part2(input: &str) -> Result<()> {
     let ids: Vec<&str> = input.lines().collect();
 
-    for i in 0..ids.len() {
-        for j in i + 1..ids.len() {
-            let (id1, id2) = (ids[i], ids[j]);
-
+    for id1 in &ids {
+        for id2 in &ids {
             if differs_by_one(id1, id2) {
                 let common_chars: String = id1.chars().zip(id2.chars())
                     .filter(|&(c1, c2)| c1 == c2)
