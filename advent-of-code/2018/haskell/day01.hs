@@ -54,7 +54,7 @@ run input = do
 
 main :: IO ()
 main = do
-  input <- readFile' "input.txt"
+  input <- readFile' "day01.txt"
   case input of
     Just contents -> run contents
     Nothing -> putStrLn "Could not find input file."
