@@ -11,4 +11,4 @@ isPrime n
 
 nth :: Int -> Maybe Integer
 nth 0 = Nothing
-nth n = Just $ toInteger $ (filter isPrime [2..]) !! (n - 1)
+nth n = Just $ toInteger $ filter isPrime [2..] !! (n - 1)
