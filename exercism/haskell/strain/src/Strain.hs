@@ -7,7 +7,4 @@ keep p (x:xs)
   | otherwise = keep p xs
 
 discard :: (a -> Bool) -> [a] -> [a]
-discard _ [] = []
-discard p (x:xs)
-  | p x = discard p xs
-  | otherwise = x : discard p xs
+discard p = keep (not . p)
