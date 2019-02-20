@@ -1,9 +1,8 @@
 module Main (main) where
 
-import System.IO
-import System.IO.Error (isDoesNotExistError)
-import Control.Monad
 import Control.Exception
+import System.IO.Error (isDoesNotExistError)
+
 import qualified Data.Set as Set
 
 -- | Read a file as a string.
