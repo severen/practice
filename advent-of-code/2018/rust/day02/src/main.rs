@@ -61,7 +61,7 @@ fn part2(input: &str) -> Result<()> {
         }
     }
 
-    Ok(())
+    Err(From::from("could not find two correct box IDs"))
 }
 
 /// Check whether the given IDs differ by *only* 1 letter.
