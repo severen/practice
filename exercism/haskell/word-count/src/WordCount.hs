@@ -19,4 +19,4 @@ wordCount :: String -> Map String Int
 wordCount = Map.fromListWith (+) . freqList . wordList
   where
     freqList = map (\s -> (map toLower s, 1))
-    wordList = map unquote . wordsBy (isSeparator)
+    wordList = map unquote . wordsBy isSeparator
