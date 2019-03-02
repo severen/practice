@@ -13,12 +13,15 @@ data Planet
 earthYear :: Float
 earthYear = 31557600
 
+timescaleOn :: Planet -> Float
+timescaleOn Earth = earthYear
+timescaleOn Mercury = earthYear * 0.2408467
+timescaleOn Venus = earthYear * 0.61519726
+timescaleOn Mars = earthYear * 1.8808158
+timescaleOn Jupiter = earthYear * 11.862615
+timescaleOn Saturn = earthYear * 29.447498
+timescaleOn Uranus = earthYear * 84.016846
+timescaleOn Neptune = earthYear * 164.79132
+
 ageOn :: Planet -> Float -> Float
-ageOn Earth age = age / earthYear
-ageOn Mercury age = age / (earthYear * 0.2408467)
-ageOn Venus age = age / (earthYear * 0.61519726)
-ageOn Mars age = age / (earthYear * 1.8808158)
-ageOn Jupiter age = age / (earthYear * 11.862615)
-ageOn Saturn age = age / (earthYear * 29.447498)
-ageOn Uranus age = age / (earthYear * 84.016846)
-ageOn Neptune age = age / (earthYear * 164.79132)
+ageOn planet age = age / timescaleOn planet
