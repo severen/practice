@@ -10,18 +10,17 @@ data Planet
   | Uranus
   | Neptune
 
-earthYear :: Float
-earthYear = 31557600
-
-timescaleOn :: Planet -> Float
-timescaleOn Earth = earthYear
-timescaleOn Mercury = earthYear * 0.2408467
-timescaleOn Venus = earthYear * 0.61519726
-timescaleOn Mars = earthYear * 1.8808158
-timescaleOn Jupiter = earthYear * 11.862615
-timescaleOn Saturn = earthYear * 29.447498
-timescaleOn Uranus = earthYear * 84.016846
-timescaleOn Neptune = earthYear * 164.79132
+orbitalPeriod :: Planet -> Float
+orbitalPeriod Earth = 1
+orbitalPeriod Mercury = 0.2408467
+orbitalPeriod Venus = 0.61519726
+orbitalPeriod Mars = 1.8808158
+orbitalPeriod Jupiter = 11.862615
+orbitalPeriod Saturn = 29.447498
+orbitalPeriod Uranus = 84.016846
+orbitalPeriod Neptune = 164.79132
 
 ageOn :: Planet -> Float -> Float
-ageOn planet age = age / timescaleOn planet
+ageOn planet age = age / (earthYear * orbitalPeriod planet)
+  where
+    earthYear = 31557600
