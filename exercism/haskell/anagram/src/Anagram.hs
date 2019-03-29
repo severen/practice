@@ -11,4 +11,4 @@ isAnagram a b = a' /= b' && sort a' == sort b'
     b' = map toLower b
 
 anagramsFor :: String -> [String] -> [String]
-anagramsFor xs xss = filter (isAnagram xs) xss
+anagramsFor = filter . isAnagram
