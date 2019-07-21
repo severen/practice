@@ -17,6 +17,7 @@ exercism/rust/*/GETTING_STARTED.md
 # Compiled object files and binaries
 *.o
 *.out
+build/
 
 ## Rust
 

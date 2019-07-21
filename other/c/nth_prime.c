@@ -19,7 +19,7 @@ bool is_prime(int n) {
   return true;
 }
 
-int nth_prime(unsigned int n) {
+int nth_prime(int n) {
   int counter = 0;
 
   if (n == 0) { exit(EXIT_FAILURE); }
