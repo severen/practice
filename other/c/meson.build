@@ -8,3 +8,4 @@ cc = meson.get_compiler('c')
 m_dep = cc.find_library('m', required : false)
 
 executable('nth_prime', 'nth_prime.c', dependencies : m_dep)
+executable('fibonacci', 'fibonacci.c', dependencies : m_dep)
