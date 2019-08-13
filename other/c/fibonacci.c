@@ -12,7 +12,7 @@ int fibonacci(int n) {
   return (int)((pow(phi, n) - pow(psi, n)) / sqrt(5));
 }
 
-int main() {
+int main(void) {
   for (int i = 0; i < 10; i++) {
     printf("Fibonacci number #%d: %d\n", i + 1, fibonacci(i));
   }

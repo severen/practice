@@ -35,7 +35,7 @@ int nth_prime(int n) {
   }
 }
 
-int main() {  
+int main(void) {  
   for (int i = 1; i <= 10; i++) {
     printf("Prime #%d: %d\n", i, nth_prime(i));
   }
