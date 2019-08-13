@@ -4,10 +4,10 @@
 
 int fibonacci(int n) {
   if (n < 0) { exit(EXIT_FAILURE); }
-  
+
   double phi = (1 + sqrt(5)) / 2;
   double psi = 1 - phi;
-  
+
   // Binet's Formula
   return (int)((pow(phi, n) - pow(psi, n)) / sqrt(5));
 }
