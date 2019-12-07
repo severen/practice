@@ -18,7 +18,7 @@ fn part1(input: &str) -> Result<()> {
         .map(|mass| (mass / 3) - 2)
         .sum();
 
-    println!("{}", required_fuel);
+    println!("Part 1: {}", required_fuel);
 
     Ok(())
 }
@@ -32,16 +32,16 @@ fn part2(input: &str) -> Result<()> {
         .map(calc)
         .flat_map(|mass| {
             iter::successors(Some(mass), |&x| {
-                if x <= 0 {
-                    None
-                } else {
+                if x != 0 {
                     Some(calc(x))
+                } else {
+                    None
                 }
             })
         })
         .sum();
 
-    println!("{}", required_fuel);
+    println!("Part 2: {}", required_fuel);
 
     Ok(())
 }
