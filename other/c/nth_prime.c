@@ -4,7 +4,7 @@
 #include <math.h>
 
 int isqrt(int n) {
-  return (int)floor(sqrt(n));
+  return (int)sqrt(n);
 }
 
 bool is_prime(int n) {
