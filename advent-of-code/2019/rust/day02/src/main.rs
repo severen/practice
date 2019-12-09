@@ -6,6 +6,7 @@ fn main() -> Result<()> {
     let input = fs::read_to_string("input.txt")?;
 
     part1(&input)?;
+    part2(&input)?;
 
     Ok(())
 }
@@ -23,6 +24,31 @@ fn part1(input: &str) -> Result<()> {
     run(&mut program, 0);
 
     println!("Part 1: {}", program[0]);
+
+    Ok(())
+}
+
+fn part2(input: &str) -> Result<()> {
+    for noun in 0..=99 {
+        for verb in 0..=99 {
+            let mut program: Vec<usize> = input
+                .split(',')
+                .map(str::trim)
+                .map(|x| x.parse().unwrap())
+                .collect();
+
+            program[1] = noun;
+            program[2] = verb;
+
+            run(&mut program, 0);
+
+            if program[0] == 19_690_720 {
+                println!("Part 2: {}", 100 * noun + verb);
+
+                break;
+            }
+        }
+    }
 
     Ok(())
 }
