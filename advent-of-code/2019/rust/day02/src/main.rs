@@ -1,79 +1,45 @@
 use std::fs;
 
+use intcode::Program;
+
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn main() -> Result<()> {
-    let input = fs::read_to_string("input.txt")?;
-
-    part1(&input)?;
-    part2(&input)?;
-
-    Ok(())
-}
-
-fn part1(input: &str) -> Result<()> {
-    let mut program: Vec<usize> = input
+    let src: Vec<usize> = fs::read_to_string("input.txt")?
         .split(',')
         .map(str::trim)
         .map(|x| x.parse().unwrap())
         .collect();
 
-    program[1] = 12;
-    program[2] = 2;
-
-    run(&mut program, 0);
-
-    println!("Part 1: {}", program[0]);
+    part1(&src);
+    part2(&src);
 
     Ok(())
 }
 
-fn part2(input: &str) -> Result<()> {
+fn part1(src: &Vec<usize>) {
+    let mut src = src.clone();
+    src[1] = 12;
+    src[2] = 2;
+
+    let res = Program::new(&src).run();
+    println!("Part 1: {}", res);
+}
+
+fn part2(src: &Vec<usize>) {
     for noun in 0..=99 {
         for verb in 0..=99 {
-            let mut program: Vec<usize> = input
-                .split(',')
-                .map(str::trim)
-                .map(|x| x.parse().unwrap())
-                .collect();
+            let mut src = src.clone();
+            src[1] = noun;
+            src[2] = verb;
 
-            program[1] = noun;
-            program[2] = verb;
+            let res = Program::new(&src).run();
 
-            run(&mut program, 0);
-
-            if program[0] == 19_690_720 {
+            if res == 19_690_720 {
                 println!("Part 2: {}", 100 * noun + verb);
 
                 break;
             }
         }
     }
-
-    Ok(())
-}
-
-fn run(program: &mut Vec<usize>, pos: usize) {
-    match program[pos] {
-        1 => {
-            let augend_pos = program[pos + 1];
-            let addend_pos = program[pos + 2];
-            let out_pos = program[pos + 3];
-
-            program[out_pos] = program[augend_pos] + program[addend_pos];
-        },
-        2 => {
-            let multiplier_pos = program[pos + 1];
-            let multiplicand_pos = program[pos + 2];
-            let out_pos = program[pos + 3];
-
-            program[out_pos] = program[multiplier_pos] * program[multiplicand_pos];
-        },
-        99 => {
-            return;
-        },
-        _ => unreachable!(),
-    }
-
-    run(program, pos + 4);
 }
