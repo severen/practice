@@ -1,13 +1,13 @@
 use std::fs;
 
-use intcode::Program;
+use common::intcode::Program;
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn main() -> Result<()> {
     let src: Vec<usize> = fs::read_to_string("input.txt")?
+        .trim_end()
         .split(',')
-        .map(str::trim)
         .map(|x| x.parse().unwrap())
         .collect();
 

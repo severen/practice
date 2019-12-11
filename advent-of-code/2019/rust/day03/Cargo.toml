@@ -1,8 +1,9 @@
 [package]
-name = "intcode"
+name = "day03"
 version = "0.1.0"
 authors = ["Severen Redwood <severen@shrike.me>"]
 
 edition = "2018"
 
 [dependencies]
+common = { path = "../common" }
