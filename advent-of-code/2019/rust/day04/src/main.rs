@@ -25,18 +25,15 @@ fn part1(range: &Vec<i32>) {
     println!("Part 1: {}", possibilities);
 }
 
-/// Convert a number into a vector of its digits.
-fn digits(x: i32) -> Vec<i32> {
-    let mut digits = Vec::new();
+/// Convert a 6-digit number into an array of its digits.
+fn digits(x: i32) -> [i32; 6] {
+    let mut digits: [i32; 6] = [0; 6];
     let mut x = x;
 
-    while x > 9 {
-        digits.push(x % 10);
+    for i in (0..6).rev() {
+        digits[i] = x % 10;
         x = x / 10;
     }
-
-    digits.push(x);
-    digits.reverse();
 
     digits
 }
