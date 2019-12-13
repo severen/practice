@@ -1,4 +1,4 @@
-use std::{fs, collections::HashSet};
+use std::{collections::HashSet, fs};
 
 use common::Point;
 
@@ -24,9 +24,10 @@ fn main() -> Result<()> {
              .split(',')
              .map(parse_instruction)
              .collect()
-        ).collect();
+        )
+        .collect();
 
-   part1(&wires);
+    part1(&wires);
 
     Ok(())
 }
@@ -43,7 +44,6 @@ fn part1(wires: &Vec<Wire>) {
 
     println!("Part 1: {}", closest_intersection);
 }
-
 
 /// Parse an instruction from a string into a direction and length.
 fn parse_instruction(x: &str) -> (Direction, i32) {
@@ -77,7 +77,7 @@ fn get_traversed_points(wire: &Vec<Segment>) -> HashSet<Point> {
                 }
 
                 cursor = end;
-            },
+            }
             Direction::Down => {
                 let end = cursor - Point::new(0, segment.1);
 
@@ -87,7 +87,7 @@ fn get_traversed_points(wire: &Vec<Segment>) -> HashSet<Point> {
                 }
 
                 cursor = end;
-            },
+            }
             Direction::Left => {
                 let end = cursor - Point::new(segment.1, 0);
 
@@ -97,7 +97,7 @@ fn get_traversed_points(wire: &Vec<Segment>) -> HashSet<Point> {
                 }
 
                 cursor = end;
-            },
+            }
             Direction::Right => {
                 let end = cursor + Point::new(segment.1, 0);
 
@@ -107,7 +107,7 @@ fn get_traversed_points(wire: &Vec<Segment>) -> HashSet<Point> {
                 }
 
                 cursor = end;
-            },
+            }
         }
     }
 

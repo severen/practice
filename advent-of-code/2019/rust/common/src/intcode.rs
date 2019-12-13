@@ -9,7 +9,8 @@ pub struct Program {
 impl Program {
     pub fn new(src: &Vec<usize>) -> Self {
         Self {
-            memory: src.clone(), address: 0
+            memory: src.clone(),
+            address: 0,
         }
     }
 

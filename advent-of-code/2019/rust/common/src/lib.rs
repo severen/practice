@@ -1,6 +1,6 @@
 use std::{
-    ops::{Add, Sub},
     convert::From,
+    ops::{Add, Sub},
 };
 
 pub mod intcode;
@@ -47,6 +47,9 @@ impl Sub for Point {
 
 impl From<(i32, i32)> for Point {
     fn from(point: (i32, i32)) -> Self {
-        Self { x: point.0, y: point.1 }
+        Self {
+            x: point.0,
+            y: point.1,
+        }
     }
 }
