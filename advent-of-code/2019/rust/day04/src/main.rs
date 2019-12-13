@@ -14,6 +14,7 @@ fn main() -> Result<()> {
         .collect();
 
     part1(&range);
+    part2(&range);
 
     Ok(())
 }
@@ -29,6 +30,17 @@ fn part1(range: &Vec<i32>) {
     println!("Part 1: {}", possibilities);
 }
 
+fn part2(range: &Vec<i32>) {
+    let possibilities = (range[0]..=range[1])
+        .map(digits)
+        .filter(has_adjacent_digits_v2)
+        .filter(has_nondecreasing_digits)
+        .collect::<Vec<Number>>()
+        .len();
+
+    println!("Part 2: {}", possibilities);
+}
+
 /// Convert a 6-digit number into an array of its digits.
 fn digits(x: i32) -> Number {
     let mut digits: Number = [0; 6];
@@ -42,22 +54,41 @@ fn digits(x: i32) -> Number {
     digits
 }
 
-/// Determine if a 6-digit number has adjacent digits.
+/// Determine if a 6-digit number has 2 adjacent digits.
 fn has_adjacent_digits(x: &Number) -> bool {
     for window in x.windows(2) {
         if window[0] == window[1] {
-            return true
+            return true;
         }
     }
 
     false
 }
 
+/// Determine if a 6-digit number has 2 adjacent digits that are not part of a
+/// larger group.
+fn has_adjacent_digits_v2(x: &Number) -> bool {
+    let mut count = 0;
+
+    for window in x.windows(2) {
+        if window[0] == window[1] {
+            count += 1;
+        } else {
+            if count == 1 {
+                return true;
+            }
+            count = 0;
+        }
+    }
+
+    count == 1
+}
+
 /// Determine if a 6-digit number has nondecreasing digits.
 fn has_nondecreasing_digits(x: &Number) -> bool {
     for window in x.windows(2) {
         if window[1] < window[0] {
-            return false
+            return false;
         }
     }
 
