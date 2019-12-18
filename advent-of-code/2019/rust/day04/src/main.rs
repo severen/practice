@@ -68,20 +68,21 @@ fn has_adjacent_digits(x: &Number) -> bool {
 /// Determine if a 6-digit number has 2 adjacent digits that are not part of a
 /// larger group.
 fn has_adjacent_digits_v2(x: &Number) -> bool {
-    let mut count = 0;
+    let mut repeats = 0;
 
     for window in x.windows(2) {
         if window[0] == window[1] {
-            count += 1;
+            repeats += 1;
         } else {
-            if count == 1 {
+            if repeats == 1 {
                 return true;
+            } else {
+                repeats = 0;
             }
-            count = 0;
         }
     }
 
-    count == 1
+    repeats == 1
 }
 
 /// Determine if a 6-digit number has nondecreasing digits.
