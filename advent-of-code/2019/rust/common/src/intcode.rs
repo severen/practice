@@ -1,3 +1,5 @@
+use std::{fs, io, path::Path};
+
 /// An instance of an Intcode program.
 pub struct Program {
     /// The program's memory.
@@ -15,6 +17,14 @@ impl Program {
         }
     }
 
+    /// Load an Intcode program from a source file.
+    pub fn from_src(path: impl AsRef<Path>) -> Result<Self, io::Error> {
+        let input = fs::read_to_string(path.as_ref())?;
+
+        Ok(Self::new(&parse_src(&input)))
+    }
+
+    /// Run an Intcode program and produce its result.
     pub fn run(&mut self) -> usize {
         let opcode = self.memory[self.address];
 
@@ -35,6 +45,15 @@ impl Program {
         self.address += 4;
         self.run()
     }
+}
+
+/// Parse an Intcode source file.
+pub fn parse_src(input: &str) -> Vec<usize> {
+    input
+        .trim_end()
+        .split(',')
+        .map(|x| x.parse().unwrap())
+        .collect()
 }
 
 #[cfg(test)]

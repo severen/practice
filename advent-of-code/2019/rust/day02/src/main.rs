@@ -1,15 +1,12 @@
 use std::fs;
 
-use common::intcode::Program;
+use common::intcode::{self, Program};
 
 type Result<T> = std::result::Result<T, Box<dyn std::error::Error>>;
 
 fn main() -> Result<()> {
-    let src: Vec<usize> = fs::read_to_string("input.txt")?
-        .trim_end()
-        .split(',')
-        .map(|x| x.parse().unwrap())
-        .collect();
+    let input = fs::read_to_string("input.txt")?;
+    let src = intcode::parse_src(&input);
 
     part1(&src);
     part2(&src);
