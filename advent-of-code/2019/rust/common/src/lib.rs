@@ -18,7 +18,7 @@ impl Point {
     }
 
     /// Calculate the Manhattan distance to another point.
-    pub fn distance(&self, other: Point) -> i32 {
+    pub fn distance(self, other: Point) -> i32 {
         (self.x - other.x).abs() + (self.y - other.y).abs()
     }
 }

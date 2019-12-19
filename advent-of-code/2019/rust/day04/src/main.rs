@@ -19,24 +19,22 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn part1(range: &Vec<i32>) {
+fn part1(range: &[i32]) {
     let possibilities = (range[0]..=range[1])
         .map(digits)
         .filter(has_adjacent_digits)
         .filter(has_nondecreasing_digits)
-        .collect::<Vec<Number>>()
-        .len();
+        .count();
 
     println!("Part 1: {}", possibilities);
 }
 
-fn part2(range: &Vec<i32>) {
+fn part2(range: &[i32]) {
     let possibilities = (range[0]..=range[1])
         .map(digits)
         .filter(has_adjacent_digits_v2)
         .filter(has_nondecreasing_digits)
-        .collect::<Vec<Number>>()
-        .len();
+        .count();
 
     println!("Part 2: {}", possibilities);
 }
@@ -48,7 +46,7 @@ fn digits(x: i32) -> Number {
 
     for i in (0..6).rev() {
         digits[i] = x % 10;
-        x = x / 10;
+        x /= 10;
     }
 
     digits
@@ -73,12 +71,10 @@ fn has_adjacent_digits_v2(x: &Number) -> bool {
     for window in x.windows(2) {
         if window[0] == window[1] {
             repeats += 1;
+        } else if repeats == 1 {
+            return true;
         } else {
-            if repeats == 1 {
-                return true;
-            } else {
-                repeats = 0;
-            }
+            repeats = 0;
         }
     }
 

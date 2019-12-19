@@ -7,9 +7,10 @@ pub struct Program {
 }
 
 impl Program {
-    pub fn new(src: &Vec<usize>) -> Self {
+    /// Load an Intcode program.
+    pub fn new(src: &[usize]) -> Self {
         Self {
-            memory: src.clone(),
+            memory: src.to_owned(),
             address: 0,
         }
     }
@@ -42,7 +43,7 @@ mod tests {
 
     #[test]
     fn basic_program() {
-        let mut program = Program::new(&vec![1, 0, 0, 0, 99]);
+        let mut program = Program::new(&[1, 0, 0, 0, 99]);
 
         assert_eq!(program.run(), 2);
     }

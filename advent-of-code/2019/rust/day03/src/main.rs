@@ -32,7 +32,7 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn part1(wires: &Vec<Wire>) {
+fn part1(wires: &[Wire]) {
     let points_1 = get_traversed_points(&wires[0]);
     let points_2 = get_traversed_points(&wires[1]);
 
@@ -60,7 +60,7 @@ fn parse_instruction(x: &str) -> (Direction, i32) {
 }
 
 /// Create the set of all points traversed by a wire.
-fn get_traversed_points(wire: &Vec<Segment>) -> HashSet<Point> {
+fn get_traversed_points(wire: &[Segment]) -> HashSet<Point> {
     // The current position in the grid.
     let mut cursor = Point::new(0, 0);
     // Set of all the traversed points.

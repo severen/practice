@@ -17,8 +17,8 @@ fn main() -> Result<()> {
     Ok(())
 }
 
-fn part1(src: &Vec<usize>) {
-    let mut src = src.clone();
+fn part1(src: &[usize]) {
+    let mut src = src.to_owned();
     src[1] = 12;
     src[2] = 2;
 
@@ -26,10 +26,10 @@ fn part1(src: &Vec<usize>) {
     println!("Part 1: {}", res);
 }
 
-fn part2(src: &Vec<usize>) {
+fn part2(src: &[usize]) {
     for noun in 0..=99 {
         for verb in 0..=99 {
-            let mut src = src.clone();
+            let mut src = src.to_owned();
             src[1] = noun;
             src[2] = verb;
 
