@@ -15,14 +15,19 @@ impl Program {
     }
 
     pub fn run(&mut self) -> usize {
+        let opcode = self.memory[self.address];
+
+        if opcode == 99 {
+            return self.memory[0];
+        }
+
         let arg_1 = self.memory[self.memory[self.address + 1]];
         let arg_2 = self.memory[self.memory[self.address + 2]];
         let out_address = self.memory[self.address + 3];
 
-        match self.memory[self.address] {
+        match opcode {
             1 => self.memory[out_address] = arg_1 + arg_2,
             2 => self.memory[out_address] = arg_1 * arg_2,
-            99 => return self.memory[0],
             _ => unreachable!(),
         }
 
