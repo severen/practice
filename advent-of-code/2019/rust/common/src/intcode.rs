@@ -1,10 +1,10 @@
-use std::{fs, io, path::Path};
+use std::{error, fmt, fs, io, path::Path};
 
 /// An instance of an Intcode program.
 pub struct Program {
-    /// The program's memory.
+    /// The program memory.
     memory: Vec<usize>,
-    /// The current address the program is on.
+    /// The current memory address the program is at.
     address: usize,
 }
 
@@ -24,12 +24,12 @@ impl Program {
         Ok(Self::new(&parse_src(&input)))
     }
 
-    /// Run an Intcode program and produce its result.
-    pub fn run(&mut self) -> usize {
+    /// Run an Intcode program and return its final value.
+    pub fn run(&mut self) -> Result<usize, Error> {
         let opcode = self.memory[self.address];
 
         if opcode == 99 {
-            return self.memory[0];
+            return Ok(self.memory[0]);
         }
 
         let arg_1 = self.memory[self.memory[self.address + 1]];
@@ -39,11 +39,28 @@ impl Program {
         match opcode {
             1 => self.memory[out_address] = arg_1 + arg_2,
             2 => self.memory[out_address] = arg_1 * arg_2,
-            _ => unreachable!(),
+            _ => return Err(Error::InvalidOpcode),
         }
 
         self.address += 4;
         self.run()
+    }
+}
+
+#[derive(Debug)]
+#[non_exhaustive]
+/// A program error that may occur during execution.
+pub enum Error {
+    InvalidOpcode,
+}
+
+impl error::Error for Error {}
+
+impl fmt::Display for Error {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        match self {
+            Error::InvalidOpcode => write!(f, "Invalid opcode encountered"),
+        }
     }
 }
 
@@ -64,6 +81,6 @@ mod tests {
     fn basic_program() {
         let mut program = Program::new(&[1, 0, 0, 0, 99]);
 
-        assert_eq!(program.run(), 2);
+        assert_eq!(program.run().unwrap(), 2);
     }
 }
