@@ -1,6 +1,6 @@
 project('aoc2020', 'cpp',
   default_options: [
-    'cpp_std=c++17',
+    'cpp_std=c++2a',
     'cpp_args=-Wextra -Wpedantic -Wconversion',
 ])
 

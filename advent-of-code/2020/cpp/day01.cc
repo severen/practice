@@ -21,8 +21,7 @@ void part1(std::vector<int> &xs, int target) {
   for (auto x : xs) {
     auto y = target - x;
 
-    // TODO: Use C++20's set::contains method instead.
-    if (seen.find(y) != seen.end()) {
+    if (seen.contains(y)) {
       std::cout << "Part 1: " << x * y << "\n";
       return;
     }
@@ -40,8 +39,7 @@ void part2(std::vector<int> &xs, int target) {
       auto y = xs[j];
       auto z = target - x - y;
 
-      // TODO: Use C++20's set::contains method instead.
-      if (seen.find(z) != seen.end()) {
+      if (seen.contains(z)) {
         std::cout << "Part 2: " << x * y * z << "\n";
         return;
       }
