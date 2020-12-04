@@ -1,8 +1,12 @@
-project('aoc2020', 'cpp',
+project('aoc-2020', 'cpp',
+  version: '0.1.0',
+  license: 'Unlicense',
   default_options: [
     'cpp_std=c++2a',
     'cpp_args=-Wextra -Wpedantic -Wconversion',
 ])
 
-executable('day01', 'day01.cc')
-executable('day03', 'day03.cc')
+solutions = ['day01', 'day03']
+foreach solution : solutions
+  executable(solution, solution + '.cc')
+endforeach
