@@ -7,7 +7,7 @@
 using Map = std::vector<std::vector<char>>;
 
 Map parse_input(std::ifstream &input) {
-  std::vector<std::vector<char>> map;
+  Map map;
 
   std::string line;
   while (getline(input, line)) {
