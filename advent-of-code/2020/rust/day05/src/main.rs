@@ -7,12 +7,26 @@ fn main() -> Result<()> {
   let ids: Vec<_> = input.lines().map(parse_id).collect();
 
   part1(&ids);
+  part2(&ids);
 
   Ok(())
 }
 
 fn part1(ids: &[u16]) {
-  println!("Part 1: {}", ids.iter().max().expect("Input is empty."));
+  let max_id = ids.iter().max().expect("Input is empty.");
+  println!("Part 1: {}", max_id);
+}
+
+fn part2(ids: &[u16]) {
+  let mut ids = ids.to_vec();
+  ids.sort_unstable();
+
+  let id = ids
+    .windows(2)
+    .find(|window| window[0] + 1 != window[1])
+    .map(|window| window[0] + 1)
+    .unwrap();
+  println!("Part 2: {}", id);
 }
 
 fn parse_id(location: &str) -> u16 {
