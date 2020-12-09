@@ -6,7 +6,7 @@ project('aoc-2020', 'cpp',
     'cpp_args=-Wextra -Wpedantic -Wconversion',
 ])
 
-solutions = ['day01', 'day03']
+solutions = ['day01', 'day03', 'day05']
 foreach solution : solutions
   executable(solution, solution + '.cc')
 endforeach
