@@ -8,7 +8,7 @@ fn main() -> Result<()> {
   let input = fs::read_to_string("input.txt")?;
   let passports: Vec<Passport> = input
     // TODO: Figure out a platform-agnostic way to split on an empty line.
-    .split("\n\n")
+    .split_terminator("\n\n")
     .map(parse_passport)
     .collect();
 
