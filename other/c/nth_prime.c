@@ -2,15 +2,25 @@
 #include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
+#include <limits.h>
+#include <errno.h>
+#include <assert.h>
 
-int isqrt(int n) {
-  return (int)sqrt(n);
+long isqrt(long n) {
+  double result = sqrt(n);
+  if (isnan(result) && errno == EDOM) {
+    return -1;
+  }
+
+  // The truncation done by this cast is equivalent to floor(sqrt(n)) because
+  // sqrt(n) is always positive.
+  return (long)result;
 }
 
-bool is_prime(int n) {
+bool is_prime(long n) {
   if (n < 2) { return false; }
 
-  for (int m = 2; m <= isqrt(n); m++) {
+  for (long m = 2; m <= isqrt(n); m++) {
     if (n % m == 0) {
       return false;
     }
@@ -19,26 +29,40 @@ bool is_prime(int n) {
   return true;
 }
 
-int nth_prime(int n) {
-  int counter = 0;
+long nth_prime(long n) {
+  if (n < 1) { exit(EXIT_FAILURE); }
 
-  if (n == 0) { exit(EXIT_FAILURE); }
-
-  for (int i = 2; ; i++) {
-    if (is_prime(i)) {
-      counter++;
-      
-      if (counter == n) {
-        return i;
-      }
+  long count = 0;
+  for (long i = 2; ; i++) {
+    if (is_prime(i) && count++ == n) {
+      return i;
     }
   }
 }
 
-int main(void) {  
-  for (int i = 1; i <= 10; i++) {
-    printf("Prime #%d: %d\n", i, nth_prime(i));
+int main(int argc, char *argv[]) {
+  // TODO: Check for this at compile time (or just don't bother at all).
+  assert((math_errhandling & MATH_ERRNO) != 0);
+
+  if (argc == 1) {
+    fprintf(stderr, "Please specify a number.\n");
+    return 1;
   }
+
+  long n = strtol(argv[1], NULL, 10);
+  if (n == 0 && errno == EINVAL) {
+    fprintf(stderr, "The input %s is not a number.\n", argv[1]);
+    return 1;
+  } else if ((n == LONG_MIN || n == LONG_MAX) && errno == ERANGE) {
+    fprintf(stderr, "The input %s is out of the range for a long int.\n", argv[1]);
+    return 1;
+  }
+
+  if (n < 1) {
+    fprintf(stderr, "The input number must be 1 or greater.\n");
+    return 1;
+  }
+  printf("Prime #%li is %li\n", n, nth_prime(n));
 
   return 0;
 }
