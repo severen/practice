@@ -4,6 +4,7 @@ project('aoc-2020', 'cpp',
   default_options: [
     'cpp_std=c++2a',
     'cpp_args=-Wextra -Wpedantic -Wconversion',
+    'b_pie=true',
 ])
 
 solutions = ['day01', 'day03', 'day05']
