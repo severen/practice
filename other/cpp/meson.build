@@ -9,3 +9,4 @@ project('practice', 'cpp',
 
 executable('nth_prime', 'nth_prime.cc')
 executable('fibonacci', 'fibonacci.cc')
+executable('isogram', 'isogram.cc')
