@@ -6,7 +6,7 @@
 
 using Map = std::vector<std::vector<char>>;
 
-Map parse_input(std::ifstream &input) {
+Map parse_input(std::ifstream& input) {
   Map map;
 
   std::string line;
@@ -17,14 +17,13 @@ Map parse_input(std::ifstream &input) {
   return map;
 }
 
-int count_trees(Map &map, std::pair<int, int> slope) {
+int count_trees(const Map& map, const std::pair<int, int> slope) {
   auto rows = map.size();
   auto cols = map[0].size();
   auto [ dy, dx ] = slope;
 
   int count = 0;
-
-  for (int i = 0; i < rows / dy; i++) {
+  for (size_t i = 0; i < rows / dy; i++) {
     auto square = map[i * dy][(i * dx) % cols];
 
     if (square == '#') {
@@ -35,11 +34,11 @@ int count_trees(Map &map, std::pair<int, int> slope) {
   return count;
 }
 
-void part1(Map &map) {
+void part1(const Map& map) {
   std::cout << "Part 1: " << count_trees(map, { 1, 3 }) << "\n";
 }
 
-void part2(Map &map) {
+void part2(const Map& map) {
   std::vector<std::pair<int, int>> slopes = {
     { 1, 1 }, { 1, 3 }, { 1, 5 }, { 1, 7 }, { 2, 1 }
   };

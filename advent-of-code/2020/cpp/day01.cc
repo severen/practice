@@ -4,7 +4,7 @@
 #include <vector>
 #include <set>
 
-std::vector<int> parse_input(std::ifstream &input) {
+std::vector<int> parse_input(std::ifstream& input) {
   std::vector<int> xs;
 
   std::string line;
@@ -15,7 +15,7 @@ std::vector<int> parse_input(std::ifstream &input) {
   return xs;
 }
 
-void part1(std::vector<int> &xs, int target) {
+void part1(const std::vector<int>& xs, const int target) {
   std::set<int> seen;
 
   for (auto x : xs) {
@@ -30,7 +30,7 @@ void part1(std::vector<int> &xs, int target) {
   }
 }
 
-void part2(std::vector<int> &xs, int target) {
+void part2(const std::vector<int>& xs, const int target) {
   for (std::size_t i = 0; i < xs.size(); i++) {
     std::set<int> seen;
 
