@@ -1,7 +1,6 @@
 #include <iostream>
 #include <string>
 #include <array>
-#include <cctype>
 
 bool is_isogram(const std::string& word) {
   std::array<char, 26> found = { 0 };
