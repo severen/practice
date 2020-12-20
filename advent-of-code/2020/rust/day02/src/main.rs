@@ -1,17 +1,15 @@
 use std::{result, error, fs};
 
 use regex::Regex;
-use lazy_static::lazy_static;
+use once_cell::sync::Lazy;
 
 type Result<T> = result::Result<T, Box<dyn error::Error>>;
 
 type Datum = ((i32, i32), (String, String));
 
-// TODO: Replace this with Lazy when once_cell is stabilised.
-lazy_static! {
-  static ref REGEX: Regex =
-    Regex::new(r"([0-9]+)-([0-9]+) ([A-Za-z]): ([A-Za-z]+)").unwrap();
-}
+static REGEX: Lazy<Regex> = Lazy::new(||
+  Regex::new(r"([0-9]+)-([0-9]+) ([A-Za-z]): ([A-Za-z]+)").unwrap()
+);
 
 fn main() -> Result<()> {
   let input: Vec<Datum> = fs::read_to_string("input.txt")?
