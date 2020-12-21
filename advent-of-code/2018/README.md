@@ -7,8 +7,8 @@ The language I have chosen to implement my solutions in this year is
 [Rust](https://rust-lang.org/), with an additional attempt to write the
 solutions in [Haskell](https://haskell.org/) as well.
 
-To run a Rust solution, enter its directory and invoke the program with
-Cargo. For example:
+To run a Rust solution, enter its directory and invoke the program with Cargo.
+For example:
 
 ```sh
 $ cd rust/day01
