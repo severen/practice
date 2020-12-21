@@ -6,8 +6,8 @@ fn main() -> Result<()> {
   let input = fs::read_to_string("input.txt")?;
   let lines: Vec<_> = input.lines().collect();
 
-  let timestamp: i64 = lines[0].parse().unwrap();
-  let ids: Vec<Option<i64>> = lines[1]
+  let timestamp = lines[0].parse().unwrap();
+  let ids: Vec<_> = lines[1]
     .split(',')
     .map(|c| c.parse().ok())
     .collect();
@@ -30,7 +30,7 @@ fn part1(timestamp: i64, ids: &[Option<i64>]) {
 }
 
 fn part2(ids: &[Option<i64>]) {
-  let residues: Vec<i64> = (0..)
+  let residues: Vec<_> = (0..)
     .zip(ids)
     .filter_map(|(i, id)| {
       if let Some(id) = id {
@@ -41,7 +41,7 @@ fn part2(ids: &[Option<i64>]) {
     })
     .map(|(i, id)| id - i)
     .collect();
-  let moduli: Vec<i64> = ids.iter().flatten().cloned().collect();
+  let moduli: Vec<_> = ids.iter().flatten().cloned().collect();
 
   let answer = crt(&residues, &moduli).unwrap();
   println!("Part 2: {:?}", answer);
