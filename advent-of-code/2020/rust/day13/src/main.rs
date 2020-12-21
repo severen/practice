@@ -9,13 +9,7 @@ fn main() -> Result<()> {
   let timestamp: i64 = lines[0].parse().unwrap();
   let ids: Vec<Option<i64>> = lines[1]
     .split(',')
-    .map(|c| {
-      if c != "x" {
-        Some(c.parse().unwrap())
-      } else {
-        None
-      }
-    })
+    .map(|c| c.parse().ok())
     .collect();
 
   part1(timestamp, &ids);
