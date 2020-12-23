@@ -23,7 +23,7 @@ int count_trees(const Map& map, const std::pair<int, int> slope) {
   auto [ dy, dx ] = slope;
 
   int count = 0;
-  for (size_t i = 0; i < rows / dy; i++) {
+  for (size_t i = 0; i < rows / dy; ++i) {
     auto square = map[i * dy][(i * dx) % cols];
 
     if (square == '#') {
@@ -39,7 +39,7 @@ void part1(const Map& map) {
 }
 
 void part2(const Map& map) {
-  std::vector<std::pair<int, int>> slopes = {
+  const std::vector<std::pair<int, int>> slopes {
     { 1, 1 }, { 1, 3 }, { 1, 5 }, { 1, 7 }, { 2, 1 }
   };
 

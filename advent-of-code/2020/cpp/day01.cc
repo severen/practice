@@ -31,12 +31,12 @@ void part1(const std::vector<int>& xs, const int target) {
 }
 
 void part2(const std::vector<int>& xs, const int target) {
-  for (std::size_t i = 0; i < xs.size(); i++) {
+  for (auto i = xs.begin(); i != xs.end(); ++i) {
     std::set<int> seen;
 
-    for (std::size_t j = i + 1; j < xs.size(); j++) {
-      auto x = xs[i];
-      auto y = xs[j];
+    for (auto j = i + 1; j != xs.end(); ++j) {
+      auto x = *i;
+      auto y = *j;
       auto z = target - x - y;
 
       if (seen.contains(z)) {
@@ -50,11 +50,11 @@ void part2(const std::vector<int>& xs, const int target) {
 }
 
 int main() {
-  int target = 2020;
-
   std::ifstream input("day01.txt");
   auto xs = parse_input(input);
-
+  
+  const int target = 2020;
+  
   part1(xs, target);
   part2(xs, target);
 
