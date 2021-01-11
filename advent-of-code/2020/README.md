@@ -5,7 +5,7 @@ These are my solutions for the [Advent of Code
 
 The language I have chosen to implement my solutions in this year is
 [Rust](https://rust-lang.org/), with an additional attempt to write the
-solutions in modern C++ as well.
+solutions in modern C++ and Haskell when I fancy.
 
 To run a Rust solution, enter its directory and invoke the program with Cargo.
 For example:
@@ -24,3 +24,15 @@ $ meson build
 $ ninja -C build
 $ build/day01
 ```
+
+To run a Haskell solution, enter its directory, build the program with `ghc`,
+and then run it. For example:
+
+```sh
+$ cd haskell
+$ ghc --make -O2 day01.hs
+$ ./day01
+```
+
+Alternatively, `runhaskell` can be used to directly run a program interpreted
+(beware: worse performance).
