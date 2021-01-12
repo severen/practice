@@ -5,17 +5,21 @@ use once_cell::sync::Lazy;
 
 type Result<T> = result::Result<T, Box<dyn error::Error>>;
 
-type Datum = ((i32, i32), (String, String));
+struct Policy {
+  min: i32,
+  max: i32,
+  chr: char,
+}
 
 static REGEX: Lazy<Regex> = Lazy::new(||
-  Regex::new(r"([0-9]+)-([0-9]+) ([A-Za-z]): ([A-Za-z]+)").unwrap()
+  Regex::new(r"^([0-9]+)-([0-9]+) ([A-Za-z]): ([A-Za-z]+)$").unwrap()
 );
 
 fn main() -> Result<()> {
-  let input: Vec<Datum> = fs::read_to_string("input.txt")?
+  let input = fs::read_to_string("input.txt")?
     .lines()
     .map(parse_line)
-    .collect();
+    .collect::<Result<Vec<_>>>()?;
 
   part1(&input);
   part2(&input);
@@ -23,30 +27,32 @@ fn main() -> Result<()> {
   Ok(())
 }
 
-fn parse_line(line: &str) -> Datum {
-  let captures = REGEX.captures(line).unwrap();
+fn parse_line(line: &str) -> Result<(String, Policy)> {
+  let captures = REGEX.captures(line).ok_or("failed to parse input")?;
 
-  let (min, max): (i32, i32) =
-    (captures[1].parse().unwrap(), captures[2].parse().unwrap());
-  let (letter, password) = (&captures[3], &captures[4]);
+  let (min, max, chr) = (
+    captures[1].parse()?,
+    captures[2].parse()?,
+    captures[3].chars().nth(0).unwrap(),
+  );
+  let password = &captures[4];
 
-  ((min, max), (letter.to_string(), password.to_string()))
+  Ok((password.to_string(), Policy { min, max, chr }))
 }
 
-fn part1(data: &[Datum]) {
+fn part1(data: &[(String, Policy)]) {
   let mut count = 0;
 
-  for datum in data {
+  for (password, policy) in data {
     let mut matches = 0;
-    let ((min, max), (letter, password)) = datum;
 
     for chr in password.chars() {
-      if chr.to_string() == *letter {
+      if chr == policy.chr {
         matches += 1;
       }
     }
 
-    if *min <= matches && matches <= *max {
+    if policy.min <= matches && matches <= policy.max {
       count += 1;
     }
   }
@@ -54,17 +60,17 @@ fn part1(data: &[Datum]) {
   println!("Part 1: {}", count);
 }
 
-fn part2(data: &[Datum]) {
+fn part2(data: &[(String, Policy)]) {
   let mut count = 0;
 
-  for datum in data {
+  for (password, policy) in data {
     let mut valid = false;
-    let ((n, m), (letter, password)) = datum;
+    let (n, m) = (policy.min, policy.max);
 
-    for i in &[(*n - 1), (*m - 1)] {
+    for i in &[(n - 1), (m - 1)] {
       let chr = password.chars().nth(*i as usize).unwrap();
 
-      if chr.to_string() == *letter {
+      if chr == policy.chr {
         valid = !valid;
       }
     }
