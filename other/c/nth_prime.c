@@ -6,6 +6,10 @@
 #include <errno.h>
 #include <assert.h>
 
+#if ((math_errhandling & MATH_ERRNO) == 0)
+  #error "This program requires support for floating point error handling via errno."
+#endif
+
 long isqrt(long n) {
   double result = sqrt(n);
   if (isnan(result) && errno == EDOM) {
@@ -41,9 +45,6 @@ long nth_prime(long n) {
 }
 
 int main(int argc, char *argv[]) {
-  // TODO: Check for this at compile time (or just don't bother at all).
-  assert((math_errhandling & MATH_ERRNO) != 0);
-
   if (argc == 1) {
     fprintf(stderr, "Please specify a number.\n");
     return 1;
