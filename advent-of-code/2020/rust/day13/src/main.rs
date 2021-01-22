@@ -4,10 +4,12 @@ type Result<T> = result::Result<T, Box<dyn error::Error>>;
 
 fn main() -> Result<()> {
   let input = fs::read_to_string("input.txt")?;
-  let lines: Vec<_> = input.lines().collect();
+  let mut lines = input.lines();
 
-  let timestamp = lines[0].parse().unwrap();
-  let ids: Vec<_> = lines[1]
+  let timestamp = lines.next().unwrap().parse()?;
+  let ids: Vec<_> = lines
+    .next()
+    .unwrap()
     .split(',')
     .map(|c| c.parse().ok())
     .collect();
@@ -47,8 +49,8 @@ fn part2(ids: &[Option<i64>]) {
   println!("Part 2: {:?}", answer);
 }
 
-/// Find the solution to a modular system of equations with m residues and n
-/// moduli according to the Chinese remainder theorem.
+/// Find the solution to a system of simultaneous congruences with m residues
+/// and n moduli according to the Chinese remainder theorem.
 fn crt(residues: &[i64], moduli: &[i64]) -> Option<i64> {
   let prod: i64 = moduli.iter().product();
 
