@@ -3,6 +3,14 @@
 #include <cmath>
 #include <cerrno>
 
+// DESCRIPTION
+//   nth_prime - find the nth prime
+// SYNOPSIS
+//   nth_prime n
+// BUILDING
+//   $ meson build
+//   $ ninja -C build
+
 #if ((math_errhandling & MATH_ERRNO) == 0)
   #error "This program requires support for floating point error handling via errno."
 #endif

@@ -2,6 +2,14 @@
 #include <string>
 #include <array>
 
+// DESCRIPTION
+//   isogram - determine whether a word is an isogram
+// SYNOPSIS
+//   isogram word
+// BUILDING
+//   $ meson build
+//   $ ninja -C build
+
 bool is_isogram(const std::string& word) {
   std::array<char, 26> found = { 0 };
 
