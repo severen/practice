@@ -16,8 +16,10 @@ unsigned long fib(long n) {
   unsigned long b = 1;
 
   for (long i = 0; i < n; ++i) {
+    unsigned long next = a + b;
+
     a = b;
-    b = a + b;
+    b = next;
   }
 
   return a;
