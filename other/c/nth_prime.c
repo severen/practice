@@ -1,10 +1,9 @@
 #include <stdio.h>
-#include <stdlib.h>
 #include <stdbool.h>
 #include <math.h>
-#include <limits.h>
 #include <errno.h>
-#include <assert.h>
+
+#include "common.h"
 
 // DESCRIPTION
 //   nth_prime - find the nth prime
@@ -12,13 +11,13 @@
 //   nth_prime n
 // BUILDING
 //   $ meson build
-//   $ ninja -C build
+//   $ meson compile -C build
 
 #if ((math_errhandling & MATH_ERRNO) == 0)
   #error "This program requires support for floating point error handling via errno."
 #endif
 
-long isqrt(long n) {
+int isqrt(int n) {
   double result = sqrt(n);
   if (isnan(result) && errno == EDOM) {
     return -1;
@@ -26,13 +25,13 @@ long isqrt(long n) {
 
   // The truncation done by this cast is equivalent to floor(sqrt(n)) because
   // sqrt(n) is always positive.
-  return (long)result;
+  return (int)result;
 }
 
-bool is_prime(long n) {
+bool is_prime(int n) {
   if (n < 2) { return false; }
 
-  for (long m = 2; m <= isqrt(n); m++) {
+  for (int m = 2; m <= isqrt(n); ++m) {
     if (n % m == 0) {
       return false;
     }
@@ -41,11 +40,10 @@ bool is_prime(long n) {
   return true;
 }
 
-long nth_prime(long n) {
-  if (n < 1) { exit(EXIT_FAILURE); }
-
-  long count = 0;
-  for (long i = 2; ; i++) {
+// Note that this function uses 0-based indexing for the primes.
+int nth_prime(int n) {
+  int count = 0;
+  for (int i = 2; ; ++i) {
     if (is_prime(i) && count++ == n) {
       return i;
     }
@@ -58,20 +56,12 @@ int main(int argc, char *argv[]) {
     return 1;
   }
 
-  long n = strtol(argv[1], NULL, 10);
-  if (n == 0 && errno == EINVAL) {
-    fprintf(stderr, "The input %s is not a number.\n", argv[1]);
-    return 1;
-  } else if ((n == LONG_MIN || n == LONG_MAX) && errno == ERANGE) {
-    fprintf(stderr, "The input %s is out of the range for a long int.\n", argv[1]);
-    return 1;
-  }
-
+  int n = parse_int(argv[1]);
   if (n < 1) {
     fprintf(stderr, "The input number must be 1 or greater.\n");
     return 1;
   }
-  printf("Prime #%li is %li\n", n, nth_prime(n));
+  printf("Prime #%i is %i.\n", n, nth_prime(n - 1));
 
   return 0;
 }
