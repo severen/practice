@@ -37,9 +37,9 @@ int main(int argc, char *argv[]) {
 
   std::string word = argv[1];
   if (is_isogram(word)) {
-    std::cout << "The given word is an isogram.\n";
+    std::cout << "The word '" << word << "' is an isogram.\n";
   } else {
-    std::cout << "The given word is not an isogram.\n";
+    std::cout << "The word '" << word << "' is not an isogram.\n";
   }
 
   return 0;
