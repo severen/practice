@@ -7,6 +7,6 @@ project('practice', 'cpp',
     'b_pie=true',
 ])
 
+executable('fib', 'fib.cc')
 executable('nth_prime', 'nth_prime.cc')
-executable('fibonacci', 'fibonacci.cc')
 executable('isogram', 'isogram.cc')
