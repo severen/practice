@@ -26,7 +26,7 @@ unsigned long fib(long n) {
 }
 
 int main(int argc, char *argv[]) {
-  if (argc == 1) {
+  if (argc < 2) {
     fprintf(stderr, "Please specify a number.\n");
     return 1;
   }
