@@ -23,7 +23,7 @@ parse _ = die "Please specify a number."
 
 run :: Int -> IO ()
 run n = putStrLn $ "Fibonacci number #" ++ show n ++ " is " ++ result ++ "."
-  where result = show $ fib $ n - 1
+  where result = show $ fib (n - 1)
 
 fib :: Int -> Int
 fib n = go n (0, 1)
