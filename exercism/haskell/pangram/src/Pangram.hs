@@ -1,8 +1,7 @@
 module Pangram (isPangram) where
 
+import Data.List ((\\))
 import Data.Char (toLower)
 
-import qualified Data.Set as Set
-
 isPangram :: String -> Bool
-isPangram cs = Set.fromList ['a'..'z'] `Set.isSubsetOf` Set.fromList (map toLower cs)
+isPangram word = null $ ['a'..'z'] \\ map toLower word

@@ -1,5 +1,5 @@
 name: pangram
-version: 1.4.1.10
+version: 2.0.0.12
 
 dependencies:
   - base
@@ -8,8 +8,6 @@ library:
   exposed-modules: Pangram
   source-dirs: src
   ghc-options: -Wall
-  dependencies:
-    - containers
 
 tests:
   test:
