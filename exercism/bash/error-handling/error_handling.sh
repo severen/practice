@@ -3,7 +3,7 @@
 set -o errexit -o nounset
 
 if [[ $# -ne 1 ]]; then
-  echo "Usage: ./error_handling <greetee>"
+  echo "Usage: error_handling.sh <person>"
   exit 1
 fi
 

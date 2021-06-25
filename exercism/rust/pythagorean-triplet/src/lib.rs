@@ -1,15 +1,17 @@
-pub fn find() -> Option<u32> {
-    let s = 1000;
+use std::collections::HashSet;
 
-    for a in 1..=s {
-        for b in 1..=s - a {
-            let c = s - a - b;
+pub fn find(n: u32) -> HashSet<[u32; 3]> {
+  let mut triples = HashSet::new();
 
-            if a * a + b * b == c * c {
-                return Some(a * b * c);
-            }
-        }
+  for a in 1..=n {
+    for b in 1..=n - a {
+      let c = n - a - b;
+
+      if a * a + b * b == c * c && a < b {
+        triples.insert([a, b, c]);
+      }
     }
+  }
 
-    None
+  triples
 }

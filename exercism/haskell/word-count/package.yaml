@@ -1,15 +1,16 @@
 name: word-count
-version: 1.2.0.6
+version: 1.4.0.8
 
 dependencies:
   - base
-  - containers
-  - split
 
 library:
   exposed-modules: WordCount
   source-dirs: src
   ghc-options: -Wall
+  dependencies:
+    - containers
+    - split
 
 tests:
   test:
