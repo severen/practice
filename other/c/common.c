@@ -7,12 +7,15 @@
 
 #include "common.h"
 
+const int BASE_10 = 10;
+
 int strtoi(const char *restrict str, char **restrict endptr, int base) {
   intmax_t n = strtoimax(str, endptr, base);
   if (n < INT_MIN) {
     errno = ERANGE;
     return INT_MIN;
-  } else if (n > INT_MAX) {
+  }
+  if (n > INT_MAX) {
     errno = ERANGE;
     return INT_MAX;
   }
@@ -21,11 +24,11 @@ int strtoi(const char *restrict str, char **restrict endptr, int base) {
 }
 
 int parse_int(const char str[]) {
-  int n = strtoi(str, NULL, 10);
+  int n = strtoi(str, NULL, BASE_10);
   if (n == 0 && errno == EINVAL) {
     fprintf(stderr, "The input %s is not a number.\n", str);
     exit(EXIT_FAILURE);
-  } else if ((n == INT_MAX || n == INT_MAX) && errno == ERANGE) {
+  } else if ((n == INT_MIN || n == INT_MAX) && errno == ERANGE) {
     fprintf(stderr, "The input %s is out of the range for an int.\n", str);
     exit(EXIT_FAILURE);
   }
@@ -33,13 +36,12 @@ int parse_int(const char str[]) {
   return n;
 }
 
-
 long parse_long(const char str[]) {
-  long n = strtol(str, NULL, 10);
+  long n = strtol(str, NULL, BASE_10);
   if (n == 0 && errno == EINVAL) {
     fprintf(stderr, "The input %s is not a number.\n", str);
     exit(EXIT_FAILURE);
-  } else if ((n == LONG_MAX || n == LONG_MAX) && errno == ERANGE) {
+  } else if ((n == LONG_MIN || n == LONG_MAX) && errno == ERANGE) {
     fprintf(stderr, "The input %s is out of the range for a long int.\n", str);
     exit(EXIT_FAILURE);
   }
