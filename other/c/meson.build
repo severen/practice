@@ -2,7 +2,7 @@ project('practice', 'c',
   version: '0.1.0',
   default_options: [
     'c_std=c17',
-    'c_args=-Wextra -Wpedantic -Wconversion',
+    'c_args=-Wall -Wextra -Wpedantic -Wconversion',
     'b_pie=true',
 ])
 
