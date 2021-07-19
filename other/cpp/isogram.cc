@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <span>
 #include <array>
 
 // DESCRIPTION
@@ -10,11 +11,14 @@
 //   $ meson build
 //   $ ninja -C build
 
+// The size of the English alphabet.
+const int ALPHABET_SIZE = 26;
+
 bool is_isogram(const std::string& word) {
-  std::array<char, 26> found = { 0 };
+  std::array<bool, ALPHABET_SIZE> found{};
 
   for (auto c : word) {
-    if (!isalpha(c)) {
+    if (isalpha(c) == 0) {
       continue;
     }
 
@@ -30,12 +34,14 @@ bool is_isogram(const std::string& word) {
 }
 
 int main(int argc, char *argv[]) {
-  if (argc < 2) {
+  auto args = std::span(argv, size_t(argc));
+
+  if (args.size() < 2) {
     std::cerr << "Please provide a word.\n";
     return 1;
   }
 
-  std::string word = argv[1];
+  auto word = std::string(args[1]);
   if (is_isogram(word)) {
     std::cout << "The word '" << word << "' is an isogram.\n";
   } else {

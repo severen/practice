@@ -1,5 +1,6 @@
 #include <iostream>
 #include <string>
+#include <span>
 #include <stdexcept>
 
 // DESCRIPTION
@@ -26,19 +27,21 @@ unsigned long fib(long n) {
 }
 
 int main(int argc, char *argv[]) {
-  if (argc < 2) {
+  auto args = std::span(argv, size_t(argc));
+
+  if (args.size() < 2) {
     std::cerr << "Please specify a number.\n";
     return 1;
   }
 
-  long n;
+  long n = 0;
   try {
-    n = std::stol(argv[1], nullptr);
+    n = std::stol(args[1], nullptr);
   } catch (const std::invalid_argument& e) {
-    std::cerr << "The input " << argv[1] << " is not a number.\n";
+    std::cerr << "The input " << args[1] << " is not a number.\n";
     return 1;
   } catch (const std::out_of_range& e) {
-    std::cerr << "The input " << argv[1] << " is out of the range for a long int.\n";
+    std::cerr << "The input " << args[1] << " is out of the range for a long int.\n";
     return 1;
   }
 
