@@ -40,6 +40,10 @@ Map *map_create(void) {
 }
 
 void map_destroy(Map *map) {
+  if (!map) {
+    return;
+  }
+
   for (int i = 0; i < NUM_BUCKETS; ++i) {
     MapEntry *current_entry = map->entries[i];
 

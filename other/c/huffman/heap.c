@@ -73,6 +73,10 @@ Heap *heap_create(int capacity) {
 }
 
 void heap_destroy(Heap *heap) {
+  if (!heap) {
+    return;
+  }
+
   // NOTE: The nodes themselves are not freed because the tree (see tree.h),
   //       not the heap, has ownership of them.
   free(heap->nodes);

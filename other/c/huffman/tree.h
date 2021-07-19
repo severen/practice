@@ -5,8 +5,8 @@
 #ifndef TREE_H
 #define TREE_H
 
-/// A weighted node in a Huffman tree that is either an interior node with a /
-//left and right child, or a leaf node with an associated character.
+/// A weighted node in a Huffman tree that is either an interior node with a
+/// left and right child, or a leaf node with an associated character.
 typedef struct Node {
   /// Whether this node is a leaf or not.
   bool isLeaf;

@@ -33,7 +33,9 @@ void node_destroy(Node *node) {
 
   if (!node->isLeaf) {
     node_destroy(node->left);
+    node->left = NULL;
     node_destroy(node->right);
+    node->right = NULL;
   }
 
   free(node);
@@ -92,6 +94,10 @@ Tree *tree_create(Map *counts) {
 }
 
 void tree_destroy(Tree *tree) {
+  if (!tree) {
+    return;
+  }
+
   node_destroy(tree->root);
   tree->root = NULL;
   map_destroy(tree->codes);

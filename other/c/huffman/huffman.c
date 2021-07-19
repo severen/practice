@@ -6,8 +6,8 @@
 #include "map.h"
 #include "tree.h"
 
-/// Create from a map from the characters in the given file to their
-/// corresponding frequencies.
+/// Create a map from the characters in the given file to their corresponding
+/// frequencies.
 Map *count_chars(FILE *file) {
   Map *counts = map_create();
 
