@@ -30,8 +30,12 @@ int isqrt(int n) {
 
 bool is_prime(int n) {
   if (n < 2) { return false; }
+  if (n == 2) { return true; }
+  if (n % 2 == 0) { return false; }
 
-  for (int m = 2; m <= isqrt(n); ++m) {
+  // We take advantage of the fact that the only prime numbers with a gap less
+  // than 2 are 2 and 3, which are already covered conditionally.
+  for (int m = 3; m <= isqrt(n); m += 2) {
     if (n % m == 0) {
       return false;
     }
