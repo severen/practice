@@ -1,5 +1,3 @@
-#![feature(iterator_fold_self)]
-
 use std::{result, error, fs, collections::HashSet};
 
 type Result<T> = result::Result<T, Box<dyn error::Error>>;
@@ -44,6 +42,6 @@ fn parse_group_v2(group: &str) -> HashSet<char> {
   group
     .lines()
     .map(|line| line.chars().collect::<HashSet<_>>())
-    .fold_first(|a, b| &a & &b)
+    .reduce(|a, b| &a & &b)
     .unwrap()
 }
