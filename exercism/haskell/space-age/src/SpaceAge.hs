@@ -1,6 +1,6 @@
 {-# LANGUAGE LambdaCase #-}
 
-module SpaceAge (Planet(..), ageOn) where
+module SpaceAge (Planet (..), ageOn) where
 
 data Planet
   = Earth
@@ -25,5 +25,5 @@ orbitalPeriod = \case
 
 ageOn :: Planet -> Float -> Float
 ageOn planet age = age / (earthYear * orbitalPeriod planet)
-  where
-    earthYear = 31557600
+ where
+  earthYear = 31557600

@@ -8,7 +8,7 @@ clean = map (\c -> if isAlpha c then c else ' ') . filter (/= '\'')
 
 -- | Uppercase the first character of a given string.
 capitalize :: String -> String
-capitalize (x:xs) = toUpper x : xs
+capitalize (x : xs) = toUpper x : xs
 capitalize "" = ""
 
 -- | Trim an all caps string down to its first character.
