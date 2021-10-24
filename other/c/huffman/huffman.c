@@ -11,13 +11,14 @@
 Map *count_chars(FILE *file) {
   Map *counts = map_create();
 
-  int chr;
-  while ((chr = fgetc(file)) != EOF) {
-    if (map_contains(counts, (char)chr)) {
-      int new_count = map_get(counts, (char)chr) + 1;
-      map_set(counts, (char)chr, new_count);
+  int res;
+  while ((res = fgetc(file)) != EOF) {
+    unsigned char chr = (unsigned char)res;
+    if (map_contains(counts, chr)) {
+      int new_count = map_get(counts, chr) + 1;
+      map_set(counts, chr, new_count);
     } else {
-      map_set(counts, (char)chr, 1);
+      map_set(counts, chr, 1);
     }
   }
 

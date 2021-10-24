@@ -16,7 +16,7 @@ typedef struct Node {
   union {
     // Leaf node
     /// The character that corresponds to this leaf node.
-    char chr;
+    unsigned char chr;
 
     // Interior node
     struct {

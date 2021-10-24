@@ -11,7 +11,7 @@
 const int NUM_BUCKETS = 127;
 
 /// Create a new entry key/value pair.
-MapEntry *map_entry_create(char key, int value) {
+MapEntry *map_entry_create(unsigned char key, int value) {
   MapEntry *entry = malloc(sizeof(MapEntry));
   entry->key = key;
   entry->value = value;
@@ -21,7 +21,7 @@ MapEntry *map_entry_create(char key, int value) {
 }
 
 /// Calculate the index in the map for a given key.
-static inline int map_index(char key) {
+static inline int map_index(unsigned char key) {
   // Technically, the key could be negative because whether or not char is
   // signed or unsigned is implementation defined. However, this should never
   // be the case in reality since we are only ever dealing with chars that
@@ -60,7 +60,7 @@ void map_destroy(Map *map) {
   free(map);
 }
 
-void map_set(Map *map, char key, int value) {
+void map_set(Map *map, unsigned char key, int value) {
   int i = map_index(key);
 
   if (!map->entries[i]) {
@@ -82,7 +82,7 @@ void map_set(Map *map, char key, int value) {
   }
 }
 
-int map_get(Map *map, char key) {
+int map_get(Map *map, unsigned char key) {
   int i = map_index(key);
 
   if (map->entries[i]) {
@@ -99,7 +99,7 @@ int map_get(Map *map, char key) {
   return -1;
 }
 
-bool map_contains(Map *map, char key) {
+bool map_contains(Map *map, unsigned char key) {
   int i = map_index(key);
 
   MapEntry *entry = map->entries[i];

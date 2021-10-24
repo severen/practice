@@ -6,7 +6,7 @@
 /// An entry in a map.
 typedef struct MapEntry {
   /// The key for this entry.
-  char key;
+  unsigned char key;
   /// The value for this entry.
   int value;
 
@@ -29,12 +29,12 @@ Map *map_create(void);
 void map_destroy(Map *map);
 
 /// Set the value for a given key.
-void map_set(Map *map, char key, int value);
+void map_set(Map *map, unsigned char key, int value);
 /// Get the value for a given key.
-int map_get(Map *map, char key);
+int map_get(Map *map, unsigned char key);
 
 /// Check if the map contains a given key.
-bool map_contains(Map *map, char key);
+bool map_contains(Map *map, unsigned char key);
 
 /// Execute the given function on each entry in the map.
 void map_foreach(Map *map, void (*f)(MapEntry *, void *), void *f_data);

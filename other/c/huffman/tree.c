@@ -17,7 +17,7 @@ Node *node_create(int weight) {
 }
 
 /// Create a new leaf node with the given weight and associated character.
-Node *leaf_create(int weight, char chr) {
+Node *leaf_create(int weight, unsigned char chr) {
   Node *leaf = node_create(weight);
   leaf->isLeaf = true;
   leaf->chr = chr;
