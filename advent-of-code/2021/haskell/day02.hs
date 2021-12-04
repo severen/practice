@@ -17,8 +17,8 @@ main = do
 parseLine :: String -> Command
 parseLine = read . capitalize
  where
-  capitalize "" = ""
   capitalize (c : cs) = toUpper c : cs
+  capitalize _ = ""
 
 part1 :: [Command] -> Int
 part1 cmds = let (x, y) = foldl executeCommand (0, 0) cmds in x * y
