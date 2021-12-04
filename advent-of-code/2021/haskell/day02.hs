@@ -10,8 +10,8 @@ data Command = Forward Int | Up Int | Down Int deriving (Read)
 
 main :: IO ()
 main = do
-  input <- lines <$> readFile "day02.txt"
-  let cmds = map parseLine input
+  input <- readFile "day02.txt"
+  let cmds = parseLine <$> lines input
 
   putStrLn $ "Part 1: " ++ (show $ part1 cmds)
   putStrLn $ "Part 2: " ++ (show $ part2 cmds)

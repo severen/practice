@@ -2,8 +2,8 @@ module Main where
 
 main :: IO ()
 main = do
-  input <- lines <$> readFile "day01.txt"
-  let xs = map read input
+  input <- readFile "day01.txt"
+  let xs = read <$> lines input
 
   putStrLn $ "Part 1: " ++ (show $ part1 xs)
   putStrLn $ "Part 2: " ++ (show $ part2 xs)
