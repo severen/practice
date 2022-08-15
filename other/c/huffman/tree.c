@@ -8,7 +8,7 @@
 /// Create a new node with the given weight.
 Node *node_create(int weight) {
   Node *node = malloc(sizeof(Node));
-  node->isLeaf = false;
+  node->is_leaf = false;
   node->weight = weight;
   node->left = NULL;
   node->right = NULL;
@@ -19,7 +19,7 @@ Node *node_create(int weight) {
 /// Create a new leaf node with the given weight and associated character.
 Node *leaf_create(int weight, unsigned char chr) {
   Node *leaf = node_create(weight);
-  leaf->isLeaf = true;
+  leaf->is_leaf = true;
   leaf->chr = chr;
 
   return leaf;
@@ -31,7 +31,7 @@ void node_destroy(Node *node) {
     return;
   }
 
-  if (!node->isLeaf) {
+  if (!node->is_leaf) {
     node_destroy(node->left);
     node->left = NULL;
     node_destroy(node->right);
@@ -53,7 +53,7 @@ void build_code_map(Node *root, Map *codes, int path) {
     return;
   }
 
-  if (root->isLeaf) {
+  if (root->is_leaf) {
     map_set(codes, root->chr, path);
   } else {
     build_code_map(root->left, codes, path << 1);

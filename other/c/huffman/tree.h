@@ -9,7 +9,7 @@
 /// left and right child, or a leaf node with an associated character.
 typedef struct Node {
   /// Whether this node is a leaf or not.
-  bool isLeaf;
+  bool is_leaf;
 
   /// The weight of this node.
   int weight;
